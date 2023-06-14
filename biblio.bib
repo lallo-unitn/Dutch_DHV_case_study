@@ -45,9 +45,55 @@
 
 @misc{online:VRRP,
     author          = {Huawei},
-    title={How Do You Secure a Server Room?},
+    title           = {What Is VRRP?},
     year            = {2022},
     organization    = {Huawei Technologies Co., Ltd.},
-    howpublished    =   {\url{https://info.support.huawei.com/info-finder/encyclopedia/en/VRRP.html}},
+    howpublished    = {\url{https://info.support.huawei.com/info-finder/encyclopedia/en/VRRP.html}},
     note            = {Accessed 2023-05-14}
+}
+
+@article{article:kolsek2002session,
+    title={Session fixation vulnerability in web-based applications},
+    author={Kolsek, Mitja},
+    journal={ACROS Security, \url{https://chabloz.eu/files/attaqueFixation.pdf}},
+    year={2002}
+}
+
+@article{artile:Java_Deserialization_Remote-Code_Execution ,
+author = {Sayar, Imen and Bartel, Alexandre and Bodden, Eric and Le Traon, Yves},
+title = {An In-Depth Study of Java Deserialization Remote-Code Execution Exploits and Vulnerabilities},
+year = {2023},
+issue_date = {January 2023},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {32},
+number = {1},
+issn = {1049-331X},
+url = {https://doi.org/10.1145/3554732},
+doi = {10.1145/3554732},
+abstract = {Nowadays, an increasing number of applications use deserialization. This technique, based on rebuilding the instance of objects from serialized byte streams, can be dangerous since it can open the application to attacks such as remote code execution (RCE) if the data to deserialize is originating from an untrusted source. Deserialization vulnerabilities are so critical that they are in OWASP’s list of top 10 security risks for web applications. This is mainly caused by faults in the development process of applications and by flaws in their dependencies, i.e., flaws in the libraries used by these applications. No previous work has studied deserialization attacks in-depth: How are they performed? How are weaknesses introduced and patched? And for how long are vulnerabilities present in the codebase? To yield a deeper understanding of this important kind of vulnerability, we perform two main analyses: one on attack gadgets, i.e., exploitable pieces of code, present in Java libraries, and one on vulnerabilities present in Java applications. For the first analysis, we conduct an exploratory large-scale study by running 256515  experiments in which we vary the versions of libraries for each of the 19 publicly available exploits. Such attacks rely on a combination of gadgets present in one or multiple Java libraries. A gadget is a method which is using objects or fields that can be attacker-controlled. Our goal is to precisely identify library versions containing gadgets and to understand how gadgets have been introduced and how they have been patched. We observe that the modification of one innocent-looking detail in a class – such as making it public – can already introduce a gadget. Furthermore, we noticed that among the studied libraries, 37.5\percentage are not patched, leaving gadgets available for future attacks.For the second analysis, we manually analyze 104 deserialization vulnerabilities CVEs to understand how vulnerabilities are introduced and patched in real-life Java applications. Results indicate that the vulnerabilities are not always completely patched or that a workaround solution is proposed. With a workaround solution, applications are still vulnerable since the code itself is unchanged.},
+journal = {ACM Trans. Softw. Eng. Methodol.},
+month = {feb},
+articleno = {25},
+numpages = {45},
+keywords = {remote code execution RCE, deserialization, gadget, vulnerabilities, Serialization}
+}
+
+
+@misc{online:cve-2022-38652,
+    author          = {National Vulnerability Database},
+    title           = {CVE-2022-38652},
+    year            = {2022},
+    organization    = {NIST},
+    howpublished    =   {\url{https://nvd.nist.gov/vuln/detail/CVE-2022-38652}},
+    note            = {Accessed 2023-06-14}
+}
+
+@misc{online:cve-2022-38650,
+    author          = {National Vulnerability Database},
+    title           = {CVE-2022-38650},
+    year            = {2022},
+    organization    = {NIST},
+    howpublished    =   {\url{https://nvd.nist.gov/vuln/detail/CVE-2022-38650}},
+    note            = {Accessed 2023-06-14}
 }
