@@ -51,6 +51,18 @@ Since this process is often running with \texttt{SYSTEM} privileges\cite{online:
 
 Even if this vulnerability requires an attacker to follow an attack chain (through CVE-2022-38650 and 38652), the exploit of these two vulnerabilities is assumed to be fairly similar and not too complex (see also the base metrics). Nonetheless, the means required to execute the attack, the "authentication material" need to be exfiltrated from the server.
 
+\subsection*{Route table poisoning - CVE-2016-7406}
+
+Dropbear is a C-written SSH suite consisting of a server and a client \footnote{\href{https://github.com/mkj/dropbear} {https://github.com/mkj/dropbear}}. This software is affected by a format string injection caused by bad input sanitization. Further information on format string injection can be found here \footnote{\href{https://owasp.org/www-community/attacks/Format_string_attack} {https://owasp.org/www-community/attacks/Format\textunderscore string\textunderscore attack}}
+
+\subsubsection*{Threat scenario}
+
+To exploit the vulnerability, during authentication, an attacker can craft a particular username containing a format string parameter (e.g. \texttt{\% s}) to crash the process or to run arbitrary code with unspecified privileges. We assume the worst case scenario, being execution with root privileges. At this point, an attacker could alter the route table of the gateway. Now, the adversary is able to mount a MITM attack (depending on the cryptographic suite in use in the communication), or just drop the routing table.
+
+\subsubsection*{Notes on likelihood}
+
+Not only the base metrics describe low skills and means requirements, but also modifying the route table and implementing a MITM attack has low chance of detection. Also no need to interact with users and/or acquiring additional knowledge.
+
 \begin{figure}[h!]
     \centering
     \includegraphics[keepaspectratio,width=1\textwidth]{03-risk-analysis/003-TE/img/threatEval.pdf}
