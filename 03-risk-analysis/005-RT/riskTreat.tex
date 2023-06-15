@@ -26,7 +26,7 @@ Regarding the main threats listed in the above section, the following main secur
     \label{fig:riskTreatCut2}
 \end{figure}
 
-At the end of this step, no threats with high risk rating remained.
+At the end of this step, no threats with high risk rating remained.\\
 
 \noindent \textcolor{blue}{Update:}
 
@@ -36,6 +36,17 @@ Citrix systems Inc. has already released an official patch with a reference guid
 
 As a result, the impact is nulled.
 
-\subsection*{Session Hijacking - CVE-2021-22927}
+\subsection*{Reverse Shell Attack - CVE-2022-38652}
 
+It is stated in the vulnerability description that the affected products are in their EOL (End-of-Life) stage. No official patches or workarounds are available. As a first approach, the deployment of a DPI firewall was taken into consideration. More specifically, the goal was to whitelist only the necessary ports in order to block the instantiation of sockets used to expose the reversed shell. 
 
+Unfortunately, not only this mitigation is too shallow since it only modifies the MAV metric, but also it can be bypassed. In fact, if an attacker has \texttt{SYSTEM} privileges on the victim machine, he/she could kill a process running on a whitelisted port and start an SSH session on that socket. Furthermore, to break the deep packet inspection, an adversary could tunnel the SSH session through a full TLS connection.\cite{online:SSH-TLS}
+
+The vulnerability is reported to exists only in the software version for Windows systems. We suggest two approaches that depends on the production environment:
+
+\begin{itemize}
+    \item \textbf{deploy the software on a container running a Linux based OS}; this can be done by setting docker option \texttt{--ipc=host}. Note that this option drops the security requirements of the container and need to be tested.
+    \item \textbf{replace Windows host with a Linux based OS}; this solution is more time consuming but it's the safest since it has been confirmed that the vulnerability does not exists in this environment.
+\end{itemize}
+
+To comply with our strict security policy, the second suggested solution is strongly advised as it surely nulls the impact of the threat.
