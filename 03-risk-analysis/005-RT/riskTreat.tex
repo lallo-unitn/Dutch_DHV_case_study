@@ -31,14 +31,7 @@ At the end of this step, no threats with high-risk ratings remained.\\
 
 \blueEmph{Unfortunately, not only this mitigation is too shallow since it only modifies the MAV metric, but also it can be bypassed. If an attacker has \texttt{SYSTEM} privileges on the victim machine, he/she could kill a process running on a whitelisted port and start an SSH session on that socket. Furthermore, to break the deep packet inspection, an adversary could tunnel the SSH session through a full TLS connection.\cite{online:SSH-TLS}}
 
-\blueEmph{The vulnerability is reported to exist only in the software version for Windows systems. We suggest two approaches that depend on the production environment:}
-
-\begin{itemize}
-    \item \blueEmph{\textbf{deploy VMWare Hyperic Agent on a container running a Linux-based OS}; this can be done by setting docker option \texttt{--ipc=host}. Note that this option drops the security requirements of the container and needs to be tested.}
-    \item \blueEmph{\textbf{replace Windows host with a Linux-based OS}; this solution is more time-consuming but it's the safest since it has been confirmed that the vulnerability does not exist in this environment.}
-\end{itemize}
-
-\blueEmph{To comply with our strict security policy, the second suggested solution is strongly advised as it surely nulls the impact of the threat.}
+\blueEmph{Since the deployed software suite is EOL, it is strongly advised to upgrade from vRealize Operations to Aria Operations\cite{online:vmwareAria}. This upgrade is justified not only by the fact that the new suite is not affected by the CVE but also because an EOL product will not receive security patches anymore.}
 
 \subsection*{Route table poisoning - CVE-2016-7406}
 
@@ -50,7 +43,7 @@ At the end of this step, no threats with high-risk ratings remained.\\
 
 \subsection*{Notes on risk treatment}
 
-\blueEmph{It is apparent that the proposed mitigation only tackles the impact metrics. This is because we believe that the suggested actions are (possibly) less time-consuming and also represent a cheaper way to address these vulnerabilities than, for example, implementing firewalls or IDSs that sometimes won't even be guaranteed to work (see reverse shell scenario above).}
+\blueEmph{It is apparent that the proposed mitigation only tackles the impact metrics. This is because, for the majority of the considered CVEs, we believe that the suggested actions are (possibly) less time-consuming and also represent a cheaper way to address these vulnerabilities. For example, implementing firewalls or IDSs not only increase the budget but also sometimes these solutions won't even be guaranteed to work (see reverse shell scenario above).}
 
 \blueEmph{Following, figure \ref{fig:riskTreatRev} shows the updates on the risk treatment table.}
 
