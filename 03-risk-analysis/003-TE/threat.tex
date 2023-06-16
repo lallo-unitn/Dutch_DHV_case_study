@@ -3,7 +3,7 @@
 
 Following the identification of the supporting asset, a set of threats and related vulnerabilities were described. 
 
-As shown in figure \ref{fig:threatsEval}, the threats with the highest impacts are the ones tied to the private network and the virtual desktop infrastructure. In particular, those threats are unauthorized wired connections and hyperjacking\cite{online:hyperjacking}. 
+As shown in figure~\ref{fig:threatsEval}, the threats with the highest impacts are the ones tied to the private network and the virtual desktop infrastructure. In particular, those threats are unauthorized wired connections and hyperjacking\cite{online:hyperjacking}.
 
 These threats were chosen assuming poor access control on the routing equipment of the network and by searching for disrupting incidents for hypervisors. 
 
@@ -13,7 +13,7 @@ Finally, only the two threats tied to the \texttt{GSB LAN gateway} were found to
 
 \noindent \textcolor{blue}{Update:} following the descriptions of the studied CVEs and related threat scenarios. 
 
-\subsection*{Session Hijacking - CVE-2021-22927}
+\subsection*{Session Hijacking \- CVE\-2021\-22927}
 
 This vulnerability affects Citrix Application Delivery Controller (Citrix ADC). An application delivery controller, among its other functions, is responsible for applying security policies. In particular, the infrastructure uses a third-party provider for authentication, entailing the fact that the ADC is configured as a SAML service provider (pre-condition for exploiting the vulnerability).
 
@@ -31,7 +31,7 @@ Exploiting the vulnerability as in the threat scenario have an high risk of dete
 
 Furthermore, the amount of required skills to employ successful social engineering practices is not underestimated.
 
-\subsection*{Reverse Shell Attack - CVE-2022-38652}
+\subsection*{Reverse Shell Attack \- CVE\-2022\-38652}
 
 This vulnerability consists in an insecure deserialization, also called object injection. It affects the software agent of VMWare Hyperic suite, version 5.8.6. In particular, the affected CPE is \\ \href{https://nvd.nist.gov/products/cpe/detail/5976A94C-7191-4547-8205-494B8379A0A3?namingFormat=2.3&orderBy=CPEURI&keyword=cpe%3A2.3%3Aa%3Avmware%3Ahyperic_agent%3A5.8.6%3A*%3A*%3A*%3A*%3A*%3A*%3A*&status=FINAL%2CDEPRECATED}{\texttt{cpe:2.3:a:vmware:hyperic\_agent:5.8.6:*:*:*:*:*:*:*}}.\\
 
@@ -39,7 +39,7 @@ For the following threat scenario description, we assume that the vulnerable sof
 
 \subsubsection*{Threat scenario}
 
-As stated in the NVD database\cite{online:cve-2022-38652}, to leverage the vulnerability, some not specified authentication material is needed from the VMWare Hyperic Server. To obtain that, the exploit of CVE-2022-38650 is required.
+As stated in the NVD database\cite{online:cve-2022-38652}, to leverage the vulnerability, some not specified authentication material is needed from the VMWare Hyperic Server. To obtain that, the exploit of CVE\-2022\-38650 is required.
 
 Note that the vulnerabilities afflicting the server and the software agent are of the same type\cite{online:cve-2022-38650}. We assume similar threat scenarios exploiting the two vulnerabilities.
 
@@ -49,11 +49,11 @@ Since this process is often running with \texttt{SYSTEM} privileges\cite{online:
 
 \subsubsection*{Notes on likelihood}
 
-Even if this vulnerability requires an attacker to follow an attack chain (through CVE-2022-38650 and 38652), the exploit of these two vulnerabilities is assumed to be fairly similar and not too complex (see also the base metrics). Nonetheless, the means required to execute the attack, the "authentication material" need to be exfiltrated from the server.
+Even if this vulnerability requires an attacker to follow an attack chain (through CVE\-2022\-38650 and 38652), the exploit of these two vulnerabilities is assumed to be fairly similar and not too complex (see also the base metrics). Nonetheless, the means required to execute the attack, the "authentication material" need to be exfiltrated from the server.
 
-\subsection*{Route table poisoning - CVE-2016-7406}
+\subsection*{Route table poisoning \- CVE\-2016\-7406}
 
-Dropbear is a C-written SSH suite consisting of a server and a client \footnote{\href{https://github.com/mkj/dropbear} {https://github.com/mkj/dropbear}}. This software is affected by a format string injection caused by bad input sanitization. Further information on format string injection can be found here \footnote{\href{https://owasp.org/www-community/attacks/Format_string_attack} {https://owasp.org/www-community/attacks/Format\textunderscore string\textunderscore attack}}
+Dropbear is a C-written SSH suite consisting of a server and a client~\footnote{\href{https://github.com/mkj/dropbear} {https://github.com/mkj/dropbear}}. This software is affected by a format string injection caused by bad input sanitization. Further information on format string injection can be found here~\footnote{\href{https://owasp.org/www-community/attacks/Format_string_attack} {https://owasp.org/www-community/attacks/Format\textunderscore string\textunderscore attack}}
 
 \subsubsection*{Threat scenario}
 
@@ -63,16 +63,12 @@ To exploit the vulnerability, during authentication, an attacker can craft a par
 
 Not only the base metrics describe low skills and means requirements, but also modifying the route table and implementing a MITM attack has low chance of detection. Also no need to interact with users and/or acquiring additional knowledge.
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[keepaspectratio,width=1\textwidth]{03-risk-analysis/003-TE/img/threatEval.pdf}
-    \caption{Threat evaluation table}
-    \label{fig:threatsEval}
-\end{figure}
+~\ref{fig:threatsEval}
+
 
 \newpage
 
-Figure \ref{fig:likelihood} shows how likely it is for an incident tied to a threat to happen. For accidental incidents and natural disasters, only the overall score is assigned.
+Figure~\ref{fig:likelihood} shows how likely it is for an incident tied to a threat to happen. For accidental incidents and natural disasters, only the overall score is assigned.
 
 As can be seen in the table, the majority of the threats with higher impacts like Coremelt are mitigated by their low likelihood. Unfortunately, threats like hyperjacking, equipment theft, and tampering still retain a high likelihood score.
 
@@ -80,9 +76,4 @@ Also, historical events were taken into consideration. In particular, since this
 
 Note that justifications for the likelihood table can be found in the excel file.
 
-\begin{figure}[]
-    \centering
-    \includegraphics[keepaspectratio,width=1\textwidth]{03-risk-analysis/003-TE/img/likelihood.pdf}
-    \caption{Threat likelihood table}
-    \label{fig:likelihood}
-\end{figure}
+~\ref{fig:likelihood}
