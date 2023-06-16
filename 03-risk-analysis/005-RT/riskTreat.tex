@@ -1,7 +1,7 @@
 \section*{Risk Treatment}
 \addcontentsline{toc}{section}{Risk Treatment}
 
-This part of the assessment aims at proposing a set of pre and post-incident security controls that can be found in figure \ref{fig:riskTreatCut2}. These controls are needed to lower the impact and the likelihood of an incident.
+This part of the assessment aims at proposing a set of pre and post-incident security controls that can be found in figure~\ref{fig:riskTreatCut2}. These controls are needed to lower the impact and the likelihood of an incident.
 
 Regarding the main threats listed in the above section, the following main security controls were proposed
 
@@ -13,8 +13,6 @@ Regarding the main threats listed in the above section, the following main secur
     \item finally, for \texttt{phishing campaigns} we need to train the personnel and implement anti-spam software on mail agents and SMTP servers to reduce the likelihood.
 \end{itemize}
 
-\ref{fig:riskTreatCut1}
-~\ref{fig:riskTreatCut2}
 
 At the end of this step, no threats with high risk rating remained.\\
 
@@ -35,7 +33,7 @@ Unfortunately, not only this mitigation is too shallow since it only modifies th
 The vulnerability is reported to exists only in the software version for Windows systems. We suggest two approaches that depends on the production environment:
 
 \begin{itemize}
-    \item \textbf{deploy the software on a container running a Linux based OS}; this can be done by setting docker option \texttt{--ipc=host}. Note that this option drops the security requirements of the container and need to be tested.
+    \item \textbf{deploy VMWare Hyperic Agent on a container running a Linux based OS}; this can be done by setting docker option \texttt{--ipc=host}. Note that this option drops the security requirements of the container and need to be tested.
     \item \textbf{replace Windows host with a Linux based OS}; this solution is more time consuming but it's the safest since it has been confirmed that the vulnerability does not exists in this environment.
 \end{itemize}
 
@@ -43,4 +41,12 @@ To comply with our strict security policy, the second suggested solution is stro
 
 \subsection*{Route table poisoning \- CVE\-2016\-7406}
 
-An official patch is publicly available. We suggest upgrading to version 2016.74 or higher.\cite{online:mitigation-cve-2016-7406}
+An official patch is publicly available. We suggest upgrading Dropbear to version 2016.74 or higher.\cite{online:mitigation-cve-2016-7406}
+
+\subsection*{Ballots data tampering \- CVE\-2018\-6683}
+
+An official patch is publicly available. We suggest upgrading MCAfee DLP to build 10.0.505 or 11.0.405 or later.\cite{online:mitigation-cve-2018-6683}
+
+\subsection*{Notes on risk treatment}
+
+It is apparent that the proposed mitigation only tackles the impact metrics. This is because we believe that the suggested actions are (possibly) less time-consuming and also represents a cheaper way to address these vulnerabilities than, for example, implementing firewalls or IDSs that sometimes won't even be guaranteed to work (see reverse shell scenario above).

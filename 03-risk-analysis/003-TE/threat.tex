@@ -11,6 +11,14 @@ Another class belongs to the physical realm. More specifically, the threats tied
 
 Finally, only the two threats tied to the \texttt{GSB LAN gateway} were found to have attenuating circumstances. This is because we are considering the gateway of a single municipality, so the incidents will be limited to that GSB.\\
 
+Figure~\ref{fig:likelihood} shows how likely it is for an incident tied to a threat to happen. For accidental incidents and natural disasters, only the overall score is assigned.
+
+As can be seen in the table, the majority of the threats with higher impacts like Coremelt are mitigated by their low likelihood. Unfortunately, threats like hyperjacking, equipment theft, and tampering still retain a high likelihood score.
+
+Also, historical events were taken into consideration. In particular, since this system is deployed in the Netherlands, data about flooding was researched\cite{online:flooding}.
+
+Note that justifications for the likelihood table can be found in the excel file.
+
 \noindent \textcolor{blue}{Update:} following the descriptions of the studied CVEs and related threat scenarios. 
 
 \subsection*{Session Hijacking \- CVE\-2021\-22927}
@@ -39,7 +47,7 @@ For the following threat scenario description, we assume that the vulnerable sof
 
 \subsubsection*{Threat scenario}
 
-As stated in the NVD database\cite{online:cve-2022-38652}, to leverage the vulnerability, some not specified authentication material is needed from the VMWare Hyperic Server. To obtain that, the exploit of CVE\-2022\-38650 is required.
+As stated in the NVD database\cite{online:cve-2022-38652}, to leverage the vulnerability, some authentication material (\texttt{PR:L}) is needed from the VMWare Hyperic Server. To obtain that, the exploit of CVE\-2022\-38650 is required.
 
 Note that the vulnerabilities afflicting the server and the software agent are of the same type\cite{online:cve-2022-38650}. We assume similar threat scenarios exploiting the two vulnerabilities.
 
@@ -63,17 +71,19 @@ To exploit the vulnerability, during authentication, an attacker can craft a par
 
 Not only the base metrics describe low skills and means requirements, but also modifying the route table and implementing a MITM attack has low chance of detection. Also no need to interact with users and/or acquiring additional knowledge.
 
-~\ref{fig:threatsEval}
+\subsection*{Ballot data tampering - CVE-2018-6683}
 
+This vulnerability affects MCAfee DLP. This software helps managing sensitive information through various functionalities\cite{online:mcafee}. For the following threat scenario we take into consideration the \texttt{compliance enforcment} regarding the modification of the data regarding the election results for the GSB. In fact, MCAfee DLP enforces RBAC on user actions that interact with sensitive data. 
 
-\newpage
+Furthermore, to simplify the analysis, we will consider the GSB PC as secondary asset even if it's probable that the process runs on the virtual machine managed by Citrix.
 
-Figure~\ref{fig:likelihood} shows how likely it is for an incident tied to a threat to happen. For accidental incidents and natural disasters, only the overall score is assigned.
+\subsubsection*{Threat scenario}
 
-As can be seen in the table, the majority of the threats with higher impacts like Coremelt are mitigated by their low likelihood. Unfortunately, threats like hyperjacking, equipment theft, and tampering still retain a high likelihood score.
+No additional information about the vulnerability other than the NVD description was found. A generic broken access control bug is present in the software. An attacker can obtain some user-level credential through the use of social engineering in order to satisfy the exploit requirements (\texttt{PR:L}). Having done so, the adversary needs to obtain physical access to the PC (\texttt{AV:P}). Again, this can be done through social engineering by successfully impersonating a technician.
 
-Also, historical events were taken into consideration. In particular, since this system is deployed in the Netherlands, data about flooding was researched\cite{online:flooding}.
+At this point, the vulnerability can be exploited to change the policies of the system and enable the adversary to modify the election data.
 
-Note that justifications for the likelihood table can be found in the excel file.
+\subsubsection*{Notes on likelihood}
 
-~\ref{fig:likelihood}
+Even though the presented threat scenario makes extensive use of social engineering techniques, the base metrics published by NVD do not require any user interaction. Nonetheless, it is required for an adversary to gain physical access to the machine and user-level privileges. This justifies the likelihood rating.
+
