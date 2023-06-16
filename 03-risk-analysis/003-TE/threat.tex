@@ -17,72 +17,93 @@ As can be seen in the table, the majority of the threats with higher impacts lik
 
 Also, historical events were taken into consideration. In particular, since this system is deployed in the Netherlands, data about flooding was researched\cite{online:flooding}.
 
-Note that justifications for the likelihood table can be found in the excel file.
+Note that justifications for the likelihood table can be found in the excel file.\\
 
-\noindent \textcolor{blue}{Update:} following the descriptions of the studied CVEs and related threat scenarios. 
+\noindent \blueEmph{Update: following the descriptions of the studied CVEs and related threat scenarios.}
+
+
 
 \subsection*{Session Hijacking \- CVE\-2021\-22927}
 
-This vulnerability affects Citrix Application Delivery Controller (Citrix ADC). An application delivery controller, among its other functions, is responsible for applying security policies. In particular, the infrastructure uses a third-party provider for authentication, entailing the fact that the ADC is configured as a SAML service provider (pre-condition for exploiting the vulnerability).
+
+
+\blueEmph{This vulnerability affects Citrix Application Delivery Controller (Citrix ADC). An application delivery controller, among its other functions, is responsible for applying security policies. In particular, the infrastructure uses a third-party provider for authentication, entailing the fact that the ADC is configured as a SAML service provider (pre-condition for exploiting the vulnerability).}
+
+
 
 \subsubsection*{Threat scenario}
 
-To carry out the session fixation attack, an adversary can connect to the application served by the ADC in order to be assigned with a saml-session id. Since the vulnerability states that no privilege are required, we assume that the ADC will assign the id without the need of authentication.
+\blueEmph{To carry out the session fixation attack, an adversary can connect to the application served by the ADC in order to be assigned with a saml-session id. Since the vulnerability states that no privilege are required, we assume that the ADC will assign the id without the need of authentication.}
 
-Once the attacker has retrieved the valid id, he/she will need to convince the victim to open a session with the application using the known session id. In the case of a web application, this can be done by convincing a user to open a link in the form of \\ \texttt{https://some.cool.application.com/?SID=SERVER\_SET\_ID\_123456789}.
+\blueEmph{Once the attacker has retrieved the valid id, he/she will need to convince the victim to open a session with the application using the known session id. In the case of a web application, this can be done by convincing a user to open a link in the form of \\ \texttt{https://some.cool.application.com/?SID=SERVER\_SET\_ID\_123456789}.}
 
-When the victim performs a login, the adversary will hijack the session using the known session id.\cite{article:kolsek2002session} Now, the attacker has the privileges of the legitimate user.
+\blueEmph{When the victim performs a login, the adversary will hijack the session using the known session id.\cite{article:kolsek2002session} Now, the attacker has the privileges of the legitimate user.}
+
 
 \subsubsection*{Notes on likelihood}
 
-Exploiting the vulnerability as in the threat scenario have an high risk of detection and punishment since an attacker needs to employ some social engineering on the victim and probably just an e-mail wouldn't suffice.
+\blueEmph{Exploiting the vulnerability as in the threat scenario have an high risk of detection and punishment since an attacker needs to employ some social engineering on the victim and probably just an e-mail wouldn't suffice.}
 
-Furthermore, the amount of required skills to employ successful social engineering practices is not underestimated.
+\blueEmph{Furthermore, the amount of required skills to employ successful social engineering practices is not underestimated.}
 
 \subsection*{Reverse Shell Attack \- CVE\-2022\-38652}
 
-This vulnerability consists in an insecure deserialization, also called object injection. It affects the software agent of VMWare Hyperic suite, version 5.8.6. In particular, the affected CPE is \\ \href{https://nvd.nist.gov/products/cpe/detail/5976A94C-7191-4547-8205-494B8379A0A3?namingFormat=2.3&orderBy=CPEURI&keyword=cpe%3A2.3%3Aa%3Avmware%3Ahyperic_agent%3A5.8.6%3A*%3A*%3A*%3A*%3A*%3A*%3A*&status=FINAL%2CDEPRECATED}{\texttt{cpe:2.3:a:vmware:hyperic\_agent:5.8.6:*:*:*:*:*:*:*}}.\\
+\blueEmph{This vulnerability consists in an insecure deserialization, also called object injection. It affects the software agent of VMWare Hyperic suite, version 5.8.6. In particular, the affected CPE is} \\ \href{https://nvd.nist.gov/products/cpe/detail/5976A94C-7191-4547-8205-494B8379A0A3?namingFormat=2.3&orderBy=CPEURI&keyword=cpe%3A2.3%3Aa%3Avmware%3Ahyperic_agent%3A5.8.6%3A*%3A*%3A*%3A*%3A*%3A*%3A*&status=FINAL%2CDEPRECATED}{\texttt{cpe:2.3:a:vmware:hyperic\_agent:5.8.6:*:*:*:*:*:*:*}}.\\
 
-For the following threat scenario description, we assume that the vulnerable software runs on the host operating system of the municipality PC.
+\blueEmph{For the following threat scenario description, we assume that the vulnerable software runs on the host operating system of the municipality PC.}
 
 \subsubsection*{Threat scenario}
 
-As stated in the NVD database\cite{online:cve-2022-38652}, to leverage the vulnerability, some authentication material (\texttt{PR:L}) is needed from the VMWare Hyperic Server. To obtain that, the exploit of CVE\-2022\-38650 is required.
+\blueEmph{As stated in the NVD database\cite{online:cve-2022-38652}, to leverage the vulnerability, some authentication material (\texttt{PR:L}) is needed from the VMWare Hyperic Server. To obtain that, the exploit of CVE\-2022\-38650 is required.}
 
-Note that the vulnerabilities afflicting the server and the software agent are of the same type\cite{online:cve-2022-38650}. We assume similar threat scenarios exploiting the two vulnerabilities.
+\blueEmph{Note that the vulnerabilities afflicting the server and the software agent are of the same type\cite{online:cve-2022-38650}. We assume similar threat scenarios exploiting the two vulnerabilities.}
 
-To leverage the vulnerability, an adversary can craft a serialized object \texttt{so} starting from a byte stream \texttt{bs} controlled by him/her. Subsequently, the attacker sends \texttt{so} to the victim that will deserialize it, obtaining \texttt{bs}. The deserialized object can contain a call to a function used to run arbitrary code with the privilege of the calling process\cite{artile:Java_Deserialization_Remote-Code_Execution}. For example, in Java such method can be \texttt{Runtime.exec()}.
+\blueEmph{To leverage the vulnerability, an adversary can craft a serialized object \texttt{so} starting from a byte stream \texttt{bs} controlled by him/her. Subsequently, the attacker sends \texttt{so} to the victim that will deserialize it, obtaining \texttt{bs}. The deserialized object can contain a call to a function used to run arbitrary code with the privilege of the calling process\cite{artile:Java_Deserialization_Remote-Code_Execution}. For example, in Java such method can be \texttt{Runtime.exec()}.}
 
-Since this process is often running with \texttt{SYSTEM} privileges\cite{online:cve-2022-38652}, also the malicious code will inherit \texttt{SYSTEM} privileges. At this point an adversary can open an SSH session on any port he/she prefers. As a result, the attacker has completely violated the host machine, granting him/her the power of manipulating the election inputted data.
+\blueEmph{Since this process is often running with \texttt{SYSTEM} privileges\cite{online:cve-2022-38652}, also the malicious code will inherit \texttt{SYSTEM} privileges. At this point an adversary can open an SSH session on any port he/she prefers. As a result, the attacker has completely violated the host machine, granting him/her the power of manipulating the election inputted data.}
 
 \subsubsection*{Notes on likelihood}
 
-Even if this vulnerability requires an attacker to follow an attack chain (through CVE\-2022\-38650 and 38652), the exploit of these two vulnerabilities is assumed to be fairly similar and not too complex (see also the base metrics). Nonetheless, the means required to execute the attack, the "authentication material" need to be exfiltrated from the server.
+\blueEmph{Even if this vulnerability requires an attacker to follow an attack chain (through CVE\-2022\-38650 and 38652), the exploit of these two vulnerabilities is assumed to be fairly similar and not too complex (see also the base metrics). Nonetheless, the means required to execute the attack, the "authentication material" need to be exfiltrated from the server.}
 
 \subsection*{Route table poisoning \- CVE\-2016\-7406}
 
-Dropbear is a C-written SSH suite consisting of a server and a client~\footnote{\href{https://github.com/mkj/dropbear} {https://github.com/mkj/dropbear}}. This software is affected by a format string injection caused by bad input sanitization. Further information on format string injection can be found here~\footnote{\href{https://owasp.org/www-community/attacks/Format_string_attack} {https://owasp.org/www-community/attacks/Format\textunderscore string\textunderscore attack}}
+\blueEmph{Dropbear is a C-written SSH suite consisting of a server and a client~\footnote{\href{https://github.com/mkj/dropbear} {https://github.com/mkj/dropbear}}. This software is affected by a format string injection caused by bad input sanitization. Further information on format string injection can be found here} \footnote{\href{https://owasp.org/www-community/attacks/Format_string_attack} {https://owasp.org/www-community/attacks/Format\textunderscore string\textunderscore attack}}.
 
 \subsubsection*{Threat scenario}
 
-To exploit the vulnerability, during authentication, an attacker can craft a particular username containing a format string parameter (e.g. \texttt{\% s}) to crash the process or to run arbitrary code with unspecified privileges. We assume the worst case scenario, being execution with root privileges. At this point, an attacker could alter the route table of the gateway. Now, the adversary is able to mount a MITM attack (depending on the cryptographic suite in use in the communication), or just drop the routing table.
+\blueEmph{To exploit the vulnerability, during authentication, an attacker can craft a particular username containing a format string parameter (e.g. \texttt{\% s}) to crash the process or to run arbitrary code with unspecified privileges. We assume the worst case scenario, being execution with root privileges. At this point, an attacker could alter the route table of the gateway. Now, the adversary is able to mount a MITM attack (depending on the cryptographic suite in use in the communication), or just drop the routing table.}
 
 \subsubsection*{Notes on likelihood}
 
-Not only do the base metrics describe low skills and means requirements, but also modifying the routing table and implementing a MITM attack has a low chance of detection. Also, no need to interact with users and/or acquire additional knowledge.
+\blueEmph{Not only do the base metrics describe low skills and means requirements, but also modifying the routing table and implementing a MITM attack has a low chance of detection. Also, no need to interact with users and/or acquire additional knowledge.}
 
 \subsection*{Ballot data tampering - CVE-2018-6683}
 
-This vulnerability affects MCAfee DLP. This software helps to manage sensitive information through various functionalities\cite{online:mcafee}. For the following threat scenario, we take into consideration the \texttt{compliance enforcment} regarding the modification of the data regarding the election results for the GSB. MCAfee DLP enforces RBAC on user actions that interact with sensitive data. 
+\blueEmph{This vulnerability affects MCAfee DLP. This software helps to manage sensitive information through various functionalities\cite{online:mcafee}. For the following threat scenario, we take into consideration the \texttt{compliance enforcment} regarding the modification of the data regarding the election results for the GSB. MCAfee DLP enforces RBAC on user actions that interact with sensitive data. }
 
-Furthermore, to simplify the analysis, we will consider the GSB PC as a secondary asset for the threat even if it's probable that the process runs on the virtual machine managed by Citrix.
+\blueEmph{Furthermore, to simplify the analysis, we will consider the GSB PC as a secondary asset for the threat even if it's probable that the process runs on the virtual machine managed by Citrix.}
 
 \subsubsection*{Threat scenario}
 
-No additional information about the vulnerability other than the NVD description was found. A generic broken access control bug is present in the software. An attacker can obtain some user-level credentials through the use of social engineering to satisfy the exploit requirements (\texttt{PR:L}). Having done so, the adversary needs to obtain physical access to the PC (\texttt{AV:P}). Again, this can be done through social engineering by successfully impersonating a technician.
+\blueEmph{No additional information about the vulnerability other than the NVD description was found. A generic broken access control bug is present in the software. An attacker can obtain some user-level credentials through the use of social engineering to satisfy the exploit requirements (\texttt{PR:L}). Having done so, the adversary needs to obtain physical access to the PC (\texttt{AV:P}). Again, this can be done through social engineering by successfully impersonating a technician.}
 
-At this point, the vulnerability can be exploited to change the policies of the system and enable the adversary to modify the election data.
+\blueEmph{At this point, the vulnerability can be exploited to change the policies of the system and enable the adversary to modify the election data.}
 
 \subsubsection*{Notes on likelihood}
 
-Even though the presented threat scenario makes extensive use of social engineering techniques, the base metrics published by NVD do not require any user interaction. Nonetheless, it is required for an adversary to gain physical access to the machine and user-level privileges. This justifies the likelihood rating.
+\blueEmph{Even though the presented threat scenario makes extensive use of social engineering techniques, the base metrics published by NVD do not require any user interaction. Nonetheless, it is required for an adversary to gain physical access to the machine and user-level privileges. This justifies the likelihood rating.}
+
+\blueEmph{Figure \ref{fig:riskEvalRev} and \ref{fig:likelihoodRev} show the updates for the risk evaluation and likelihood tables.}
+
+\begin{figure}[!hb]
+    \centering
+    \includegraphics[keepaspectratio,width=0.75\textwidth]{03-risk-analysis/003-TE/img/RevisedRiskEval.pdf}
+    \caption{Risk evaluation table: modifications in light-blue}~\label{fig:riskEvalRev}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[keepaspectratio,width=\textwidth]{03-risk-analysis/003-TE/img/Revised_likelihood.pdf}
+    \caption{Likelihood table: modifications in light-blue}~\label{fig:likelihoodRev}
+\end{figure}

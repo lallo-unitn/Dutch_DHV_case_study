@@ -16,37 +16,46 @@ Regarding the main threats listed in the above section, the following main secur
 
 At the end of this step, no threats with high-risk ratings remained.\\
 
-\noindent \textcolor{blue}{Update:}
+
+\noindent \blueEmph{Update:}
 
 \subsection*{Session Hijacking \- CVE\-2021\-22927}
 
-Citrix Systems Inc. has already released an official patch with a reference guide on how to configure SAML. For this reason, the vulnerability can be removed by upgrading the Citrix ADC software to version \texttt{13.0-82.41} or later, and by following the official configuration guide. \footnote{\href{https://support.citrix.com/article/CTX316577/citrix-application-delivery-controller-and-citrix-gateway-saml-configuration-reference-guide} {https://support.citrix.com/article/CTX316577/citrix-application-delivery-controller-and-citrix-gateway-saml-\\configuration-reference-guide}}
+\blueEmph{Citrix Systems Inc. has already released an official patch with a reference guide on how to configure SAML. For this reason, the vulnerability can be removed by upgrading the Citrix ADC software to version \texttt{13.0-82.41} or later, and by following the official configuration guide.} \footnote{\href{https://support.citrix.com/article/CTX316577/citrix-application-delivery-controller-and-citrix-gateway-saml-configuration-reference-guide} {https://support.citrix.com/article/CTX316577/citrix-application-delivery-controller-and-citrix-gateway-saml-\\configuration-reference-guide}}
 
-As a result, the impact is nulled.
+\blueEmph{As a result, the impact is nulled.}
 
 \subsection*{Reverse Shell Attack \- CVE\-2022\-38652}
 
-It is stated in the vulnerability description that the affected products are in their EOL (End-of-Life) stage. No official patches or workarounds are available. As a first approach, the deployment of a DPI firewall was taken into consideration. More specifically, the goal was to whitelist only the necessary ports to block the instantiation of sockets used to expose the reversed shell. 
+\blueEmph{It is stated in the vulnerability description that the affected products are in their EOL (End-of-Life) stage. No official patches or workarounds are available. As a first approach, the deployment of a DPI firewall was taken into consideration. More specifically, the goal was to whitelist only the necessary ports to block the instantiation of sockets used to expose the reversed shell. }
 
-Unfortunately, not only this mitigation is too shallow since it only modifies the MAV metric, but also it can be bypassed. If an attacker has \texttt{SYSTEM} privileges on the victim machine, he/she could kill a process running on a whitelisted port and start an SSH session on that socket. Furthermore, to break the deep packet inspection, an adversary could tunnel the SSH session through a full TLS connection.\cite{online:SSH-TLS}
+\blueEmph{Unfortunately, not only this mitigation is too shallow since it only modifies the MAV metric, but also it can be bypassed. If an attacker has \texttt{SYSTEM} privileges on the victim machine, he/she could kill a process running on a whitelisted port and start an SSH session on that socket. Furthermore, to break the deep packet inspection, an adversary could tunnel the SSH session through a full TLS connection.\cite{online:SSH-TLS}}
 
-The vulnerability is reported to exist only in the software version for Windows systems. We suggest two approaches that depend on the production environment:
+\blueEmph{The vulnerability is reported to exist only in the software version for Windows systems. We suggest two approaches that depend on the production environment:}
 
 \begin{itemize}
-    \item \textbf{deploy VMWare Hyperic Agent on a container running a Linux-based OS}; this can be done by setting docker option \texttt{--ipc=host}. Note that this option drops the security requirements of the container and needs to be tested.
-    \item \textbf{replace Windows host with a Linux-based OS}; this solution is more time-consuming but it's the safest since it has been confirmed that the vulnerability does not exist in this environment.
+    \item \blueEmph{\textbf{deploy VMWare Hyperic Agent on a container running a Linux-based OS}; this can be done by setting docker option \texttt{--ipc=host}. Note that this option drops the security requirements of the container and needs to be tested.}
+    \item \blueEmph{\textbf{replace Windows host with a Linux-based OS}; this solution is more time-consuming but it's the safest since it has been confirmed that the vulnerability does not exist in this environment.}
 \end{itemize}
 
-To comply with our strict security policy, the second suggested solution is strongly advised as it surely nulls the impact of the threat.
+\blueEmph{To comply with our strict security policy, the second suggested solution is strongly advised as it surely nulls the impact of the threat.}
 
 \subsection*{Route table poisoning \- CVE\-2016\-7406}
 
-An official patch is publicly available. We suggest upgrading Dropbear to version 2016.74 or higher.\cite{online:mitigation-cve-2016-7406}
+\blueEmph{An official patch is publicly available. We suggest upgrading Dropbear to version 2016.74 or higher.\cite{online:mitigation-cve-2016-7406}}
 
 \subsection*{Ballots data tampering \- CVE\-2018\-6683}
 
-An official patch is publicly available. We suggest upgrading MCAfee DLP to build 10.0.505 or 11.0.405 or later.\cite{online:mitigation-cve-2018-6683}
+\blueEmph{An official patch is publicly available. We suggest upgrading MCAfee DLP to build 10.0.505 or 11.0.405 or later.\cite{online:mitigation-cve-2018-6683}}
 
 \subsection*{Notes on risk treatment}
 
-It is apparent that the proposed mitigation only tackles the impact metrics. This is because we believe that the suggested actions are (possibly) less time-consuming and also represent a cheaper way to address these vulnerabilities than, for example, implementing firewalls or IDSs that sometimes won't even be guaranteed to work (see reverse shell scenario above).
+\blueEmph{It is apparent that the proposed mitigation only tackles the impact metrics. This is because we believe that the suggested actions are (possibly) less time-consuming and also represent a cheaper way to address these vulnerabilities than, for example, implementing firewalls or IDSs that sometimes won't even be guaranteed to work (see reverse shell scenario above).}
+
+\blueEmph{Following, figure \ref{fig:riskTreatRev} shows the updates on the risk treatment table.}
+
+\begin{figure}[!hb]
+    \centering
+    \includegraphics[keepaspectratio,width=\textwidth]{03-risk-analysis/005-RT/img/RevisedRiskTreat.pdf}
+    \caption{Risk treatment table: modifications in light-blue}~\label{fig:riskTreatRev}
+\end{figure}
