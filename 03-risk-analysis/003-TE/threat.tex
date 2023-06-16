@@ -69,21 +69,20 @@ To exploit the vulnerability, during authentication, an attacker can craft a par
 
 \subsubsection*{Notes on likelihood}
 
-Not only the base metrics describe low skills and means requirements, but also modifying the route table and implementing a MITM attack has low chance of detection. Also no need to interact with users and/or acquiring additional knowledge.
+Not only do the base metrics describe low skills and means requirements, but also modifying the routing table and implementing a MITM attack has a low chance of detection. Also, no need to interact with users and/or acquire additional knowledge.
 
 \subsection*{Ballot data tampering - CVE-2018-6683}
 
-This vulnerability affects MCAfee DLP. This software helps managing sensitive information through various functionalities\cite{online:mcafee}. For the following threat scenario we take into consideration the \texttt{compliance enforcment} regarding the modification of the data regarding the election results for the GSB. In fact, MCAfee DLP enforces RBAC on user actions that interact with sensitive data. 
+This vulnerability affects MCAfee DLP. This software helps to manage sensitive information through various functionalities\cite{online:mcafee}. For the following threat scenario, we take into consideration the \texttt{compliance enforcment} regarding the modification of the data regarding the election results for the GSB. MCAfee DLP enforces RBAC on user actions that interact with sensitive data. 
 
-Furthermore, to simplify the analysis, we will consider the GSB PC as secondary asset even if it's probable that the process runs on the virtual machine managed by Citrix.
+Furthermore, to simplify the analysis, we will consider the GSB PC as a secondary asset for the threat even if it's probable that the process runs on the virtual machine managed by Citrix.
 
 \subsubsection*{Threat scenario}
 
-No additional information about the vulnerability other than the NVD description was found. A generic broken access control bug is present in the software. An attacker can obtain some user-level credential through the use of social engineering in order to satisfy the exploit requirements (\texttt{PR:L}). Having done so, the adversary needs to obtain physical access to the PC (\texttt{AV:P}). Again, this can be done through social engineering by successfully impersonating a technician.
+No additional information about the vulnerability other than the NVD description was found. A generic broken access control bug is present in the software. An attacker can obtain some user-level credentials through the use of social engineering to satisfy the exploit requirements (\texttt{PR:L}). Having done so, the adversary needs to obtain physical access to the PC (\texttt{AV:P}). Again, this can be done through social engineering by successfully impersonating a technician.
 
 At this point, the vulnerability can be exploited to change the policies of the system and enable the adversary to modify the election data.
 
 \subsubsection*{Notes on likelihood}
 
 Even though the presented threat scenario makes extensive use of social engineering techniques, the base metrics published by NVD do not require any user interaction. Nonetheless, it is required for an adversary to gain physical access to the machine and user-level privileges. This justifies the likelihood rating.
-
